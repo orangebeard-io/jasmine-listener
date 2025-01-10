@@ -1,6 +1,6 @@
 {
   "name": "@orangebeard-io/jasmine-orangebeard-reporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A reporter to send Jasmine output to Orangebeard.io",
   "main": "dist/index.js",
   "files": [
