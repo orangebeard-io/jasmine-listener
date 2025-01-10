@@ -40,7 +40,7 @@ npm install @orangebeard-io/jasmine-orangebeard-reporter
 
 ## Configuration
 
-Create orangebeard.json (in your test projects's folder (or above))
+Create orangebeard.json (in your test project's folder (or above))
 
 ```JSON
 {
@@ -61,17 +61,33 @@ Create orangebeard.json (in your test projects's folder (or above))
 }
 ```
 
-Configure the reporter in jasmine-config.ts:
-```ts
-export default defineConfig({
-    testDir: './my-tests',
-    reporter: [['@orangebeard-io/jasmine-orangebeard-reporter']],
-    projects: [
-        {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-        }]
+Or configure in the javascript object.
+
+Configure the reporter in your tests:
+```js
+const {OrangebeardReporter} = require("@orangebeard-io/jasmine-orangebeard-reporter/dist/reporter/OrangebeardReporter");
+
+const orangebeardReporter = new OrangebeardReporter({
+  endpoint: "https://my-company.orangebeard.app",
+  token: "listener-token",
+  project: "my-project",
+  testset: "jasmine example",
+  description: "A run from jasmine",
+  attributes: [
+    {
+      key: "Config",
+      value: "Inline"
+    },
+    {
+      value: "someTag"
+    }
+  ]
 });
+
+//or for use with orangebeard.json and/or env variables:
+//const orangebeardReporter = new OrangebeardReporter();
+
+jasmine.getEnv().addReporter(orangebeardReporter)
 ```
 
 ### Running
